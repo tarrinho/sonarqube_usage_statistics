@@ -12,7 +12,7 @@ token = os.getenv('SONARQUBE_TOKEN')
 url = os.getenv('SONARQUBE_URL') 
 number_entries = "1000"
 curl = "/usr/bin/curl"
-print('id_number ; componentName ; status ; submittedAt ; submitterLogin')
+print('count ; id_number ; componentName ; status ; submittedAt ; executedAt ; executedTimeMs ; submitterLogin ;  hasScannerContext ; warningCount')
 id_number=0;
 while True:
     command = curl + ' -u ' + token +': ' + url + '?ps=' + number_entries + '\&type=REPORT\&maxExecutedAt=' + date + ' 2>/dev/null'
@@ -39,11 +39,11 @@ while True:
         entry_parsed = json.loads(json.dumps(entry))
         try:
             id_number += 1
-            print(id_number, ";" , entry_parsed['componentName'], " ; " , entry_parsed['status'], " ; " , entry_parsed['submittedAt'], " ; " , entry_parsed['submitterLogin'][:-5])
+            print(id_number, ";" , entry_parsed['id'], " ; ", entry_parsed['componentName'], " ; " , entry_parsed['status'], " ; " , entry_parsed['submittedAt'], " ; " , entry_parsed['executedAt'], " ; " , entry_parsed['executionTimeMs'], " ; " , entry_parsed['submitterLogin'][:-5], " ; " , entry_parsed['hasScannerContext'], " ; " , entry_parsed['warningCount'])
             last_entry_date = entry_parsed['submittedAt']
         except:
             print("EXCEPTION: field not found - ", entry_parsed['id'])
             break
 
     date = last_entry_date.replace("+","%2B")
-print("Total: " , id_number)
+#print("Total: " , id_number)
