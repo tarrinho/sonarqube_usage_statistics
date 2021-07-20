@@ -12,3 +12,5 @@ Just run:
 ```
 python3 sonarqube_stats.py
 ```
+
+Read more about the process in my blog: https://pt4.tech/blog/sonarqube-usage-stats/
