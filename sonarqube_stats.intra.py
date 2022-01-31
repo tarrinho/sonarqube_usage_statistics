@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/bin/python3
 # 2021-07-09 - Pedro Tarrinho - Goal - extract all events from Sonarqube in order to generate statistics of usage
 
 import json
@@ -10,7 +10,7 @@ date = "3021-04-08T18:17:07%2B0000"
 # define an environment variable like:  export SONARQUBE_TOKEN="token"
 token = os.getenv('SONARQUBE_TOKEN') 
 # define an environment variable like:  export SONARQUBE_URL="https://site.example/"
-url = os.getenv('SONARQUBE_URL') + "api/ce/activity" 
+url = os.getenv('SONARQUBE_INTRA_URL') + "api/ce/activity" 
 number_entries = "1000"
 curl = "/usr/bin/curl"
 #Remover o comentário, caso seja o primeiro a ser executado print('count ; id_number ; componentName ; status ; submittedAt ; executedAt ; executedTimeMs ; submitterLogin ;  hasScannerContext ; warningCount')

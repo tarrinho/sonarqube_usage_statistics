@@ -8,14 +8,13 @@ import os
 
 date = "3021-04-08T18:17:07%2B0000"
 # define an environment variable like:  export SONARQUBE_TOKEN="token"
-token = os.getenv('SONARQUBE_TOKEN') 
+token = os.getenv('SONARQUBE_OLD_TOKEN') 
 # define an environment variable like:  export SONARQUBE_URL="https://site.example/"
-url = os.getenv('SONARQUBE_URL') + "api/ce/activity" 
+url = os.getenv('SONARQUBE_OLD_URL') + "api/ce/activity" 
 number_entries = "1000"
 curl = "/usr/bin/curl"
-#Remover o comentário, caso seja o primeiro a ser executado print('count ; id_number ; componentName ; status ; submittedAt ; executedAt ; executedTimeMs ; submitterLogin ;  hasScannerContext ; warningCount')
-#id_number=`wc -l /mnt/c/Users/NB26614/Novabase/Celfocus\ Application\ Security\ -\ Sonarqube\ -\ Statistics\ -\ Sonarqube\ -\ Statistics/sonarqube.extract.csv | cut -d " " -f 1`
-id_number=0
+print('count ; id_number ; componentName ; status ; submittedAt ; executedAt ; executedTimeMs ; submitterLogin ;  hasScannerContext ; warningCount')
+id_number=0;
 while True:
     command = curl + ' -u ' + token +': ' + url + '?ps=' + number_entries + '\&type=REPORT\&maxExecutedAt=' + date + ' 2>/dev/null'
 
