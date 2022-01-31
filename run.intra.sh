@@ -1,7 +1,16 @@
 echo `date`
-#echo $SONARQUBE_OLD_URL
-#/home/kaser/work-temp/Development/sonarqube_usage_statistics/sonarqube_stats_old.py > /mnt/c/Users/NB26614/Novabase/Celfocus\ Application\ Security\ -\ Sonarqube\ -\ Statistics\ -\ Sonarqube\ -\ Statistics/sonarqube.extract.csv
-#/home/kaser/work-temp/Development/sonarqube_usage_statistics/sonarqube_stats_old.py > /mnt/c/Users/NB26614/Novabase/Celfocus\ Application\ Security\ -\ General/Sonarqube\ Statistics/sonarqube.extract.csv
 echo $SONARQUBE_URL
-/home/kaser/work-temp/Development/sonarqube_usage_statistics/sonarqube_stats.intra.py >> /mnt/c/Users/NB26614/Novabase/Celfocus\ Application\ Security\ -\ Sonarqube\ -\ Statistics\ -\ Sonarqube\ -\ Statistics//sonarqube.extract.intra.csv
-#/home/kaser/work-temp/Development/sonarqube_usage_statistics/sonarqube_stats.py >> /mnt/c/Users/NB26614/Novabase/Celfocus\ Application\ Security\ -\ General/Sonarqube\ Statistics/sonarqube.extract.csv
+current_file="sonarqube.extract.intra.csv"
+new_file="sonarqube.extract.intra.csv.tmp"
+
+sonarqube_stats.intra.py >> "$new_file" 
+
+new_size=$(ls -la "$new_file" | awk '{print $5}' )
+current_size=$(ls -la "$current_file" | awk '{print $5}' )
+
+if (( $new_size > $current_size )) ; then
+    echo "New file is bigger, will substitute it!"
+    $(cp "$new_file" "$current_file")
+else
+    echo "No changes!"
+fi
